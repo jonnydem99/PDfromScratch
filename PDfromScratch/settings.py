@@ -134,3 +134,7 @@ EMAIL_HOST_PASSWORD = "rootroot123"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = "jonathanpniess@gmail.com"
+
+#Logout/Login redirects
+LOGIN_REDIRECT_URL = '/store/'
+LOGOUT_REDIRECT_URL = '/store/'
