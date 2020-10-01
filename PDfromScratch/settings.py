@@ -31,6 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'sslserver',
+    'django_extensions',
+    'social_django',
     'django_registration',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -49,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'PDfromScratch.urls'
@@ -60,10 +64,14 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -138,3 +146,19 @@ DEFAULT_FROM_EMAIL = "jonathanpniess@gmail.com"
 #Logout/Login redirects
 LOGIN_REDIRECT_URL = '/store/'
 LOGOUT_REDIRECT_URL = '/store/'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'home'
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.github.GithubOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+# Social Auth - Facebook
+SOCIAL_AUTH_FACEBOOK_KEY = '1310730225935713'
+SOCIAL_AUTH_FACEBOOK_SECRET = '2a436431ab0f438bbcd3480ea3bb858c'
+
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
